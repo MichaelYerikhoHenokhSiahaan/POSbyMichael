@@ -1,6 +1,6 @@
 # Point Of Sale
 
-Point Of Sale is a Laravel 13 web application for managing retail sales, customers, inventory, warehouse invoices, and gas transactions from a single dashboard.
+Point Of Sale is a Laravel 13 web application for managing retail sales, customers, inventory, and warehouse invoices from a single dashboard.
 
 ## Overview
 
@@ -10,7 +10,7 @@ This project is built for store operations that need:
 - product, category, and customer management
 - inventory restocking and stock movement tracking
 - warehouse invoice creation and printable warehouse receipts
-- gas stock input and gas sales workflows
+
 - transaction filtering and Excel export
 - role-based access for developer and admin users
 
@@ -46,13 +46,6 @@ This project is built for store operations that need:
 - Print warehouse invoice receipts
 - Record warehouse stock removal movements
 
-### Gas Management
-
-- Input gas stock
-- Sell `Isi Gas`, `Gas Kosong`, and `Gas + Isi`
-- Automatic stock adjustments between related gas products
-- Discount pricing rules for `Isi Gas`
-- Gas transaction history with filters
 
 ### Master Data
 
@@ -196,7 +189,7 @@ Main route groups:
 - `/login` - sign in
 - `/sales` - POS sales flow
 - `/warehouse-invoices` - warehouse invoice management
-- `/gas` - gas stock and sales
+
 - `/restock` - stock replenishment
 - `/customers` - customer management
 - `/dashboard` - developer dashboard
