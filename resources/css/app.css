@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer components {
+    .auto-layout-grid {
+        display: grid;
+        gap: 2rem;
+        align-items: start;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    }
+
+    .auto-layout-sidebar {
+        display: grid;
+        gap: 2rem;
+        align-items: start;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .auto-layout-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .auto-layout-filters {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+        align-items: end;
+    }
+
+    .auto-layout-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: end;
+    }
+
+    .auto-layout-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .auto-layout-nav {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+    }
+
+    .auto-layout-nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        min-height: 2.75rem;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .auto-layout-card-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+        .auto-layout-sidebar {
+            grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .auto-layout-nav-item {
+            white-space: normal;
+            word-break: break-word;
+        }
+    }
+}
