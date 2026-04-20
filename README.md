@@ -1,58 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Point Of Sale
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Point Of Sale is a Laravel 13 web application for managing retail sales, customers, inventory, warehouse invoices, and gas transactions from a single dashboard.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is built for store operations that need:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- point-of-sale checkout with receipts
+- product, category, and customer management
+- inventory restocking and stock movement tracking
+- warehouse invoice creation and printable warehouse receipts
+- gas stock input and gas sales workflows
+- transaction filtering and Excel export
+- role-based access for developer and admin users
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+- PHP 8.3
+- Laravel 13
+- MySQL
+- Vite 8
+- Tailwind CSS 4
+- PHPUnit 12
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Main Modules
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Authentication
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Username/password login
+- Session-based authentication
+- Protected routes under custom POS middleware
 
-## Agentic Development
+### Sales
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Create retail sales with multiple items
+- Automatic invoice number generation
+- Customer payment and change calculation
+- Printable sales receipt
+- Recent transaction search, filter, sort, and export
+
+### Warehouse Invoices
+
+- Create warehouse-focused invoices
+- Track payment status: `Lunas` or `Belum Lunas`
+- Print warehouse invoice receipts
+- Record warehouse stock removal movements
+
+### Gas Management
+
+- Input gas stock
+- Sell `Isi Gas`, `Gas Kosong`, and `Gas + Isi`
+- Automatic stock adjustments between related gas products
+- Discount pricing rules for `Isi Gas`
+- Gas transaction history with filters
+
+### Master Data
+
+- Users
+- Categories
+- Products
+- Customers
+- Transaction records
+
+## Roles
+
+The app currently uses two roles:
+
+- `developer`: full access to dashboard, users, categories, products, warehouse, and transaction records
+- `admin`: operational access for sales and other non-developer workflows
+
+## Default Seed Data
+
+The default database seeder creates:
+
+- one developer user
+- sample categories
+- sample retail products
+- one sample customer
+
+Default login after seeding:
+
+- Username: `MYHS`
+- Password: `udindo123`
+
+## Project Structure
+
+Key folders:
+
+- `app/Http/Controllers` - application workflows
+- `app/Models` - Eloquent models
+- `database/migrations` - schema definition
+- `database/seeders` - initial data
+- `resources/views` - Blade UI
+- `routes/web.php` - web routes
+
+## Local Setup
+
+### Requirements
+
+Make sure you have installed:
+
+- PHP 8.3 or newer
+- Composer
+- Node.js and npm
+- MySQL
+
+### Installation
+
+1. Install PHP dependencies:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. Copy environment file:
 
-## Contributing
+```bash
+copy .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Generate the application key:
 
-## Code of Conduct
+```bash
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Configure your database in `.env`.
 
-## Security Vulnerabilities
+5. Run migrations:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate
+```
 
-## License
+6. Seed initial data:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan db:seed
+```
+
+7. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+## Running The App
+
+For local development:
+
+```bash
+composer run dev
+```
+
+This starts:
+
+- Laravel development server
+- queue listener
+- log watcher
+- Vite dev server
+
+If you prefer separate commands:
+
+```bash
+php artisan serve
+npm run dev
+```
+
+## Build Assets
+
+To build production assets:
+
+```bash
+npm run build
+```
+
+## Testing
+
+Run the test suite with:
+
+```bash
+composer test
+```
+
+Or:
+
+```bash
+php artisan test
+```
+
+## Important Routes
+
+Main route groups:
+
+- `/login` - sign in
+- `/sales` - POS sales flow
+- `/warehouse-invoices` - warehouse invoice management
+- `/gas` - gas stock and sales
+- `/restock` - stock replenishment
+- `/customers` - customer management
+- `/dashboard` - developer dashboard
+
+## Notes
+
+- The app redirects `/` to `/sales` after authentication.
+- Sales receipt and warehouse invoice receipt pages are printable.
+- Some developer-only features are protected by role middleware.
+- The default README from Laravel has been replaced with project-specific documentation.
