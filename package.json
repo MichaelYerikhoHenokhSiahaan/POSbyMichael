@@ -1,4 +1,9 @@
 {
+    "name": "my-package",
+  "scripts": {
+    "build": "babel src -d lib",
+    "test": "jest"
+  }
 
     "$schema": "https://www.schemastore.org/package.json",
     "private": true,
